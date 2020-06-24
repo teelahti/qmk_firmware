@@ -2,16 +2,37 @@
 
 #include "iris.h"
 #include "keymap_finnish.h"
+#include "sendstring_finnish.h"
 #include "eeconfig.h"
 
 extern keymap_config_t keymap_config;
 
-// Layers
-#define _BASE 0
-#define _NUM 1
-#define _SNUM 2
-#define _NAV 3
-#define _CTL 4
+enum layers {
+    _BASE,
+    _NUM,
+    _SNUM,
+    _NAV,
+    _CTL
+};
+
+enum custom_keycodes {
+    NOTEQUAL = SAFE_RANGE,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case NOTEQUAL:
+        if (record->event.pressed) {
+            // when keycode NOTEQUAL is pressed
+            SEND_STRING("!=");
+        } else {
+            // when keycode NOTEQUAL is released
+        }
+        break;
+    }
+    return true;
+};
+
 
 // Abbreviations
 #define _G LGUI_T
@@ -30,7 +51,6 @@ extern keymap_config_t keymap_config;
 #define RCBR LALT(KC_LPRN) // FI_RCBR, }
 #define LABK KC_GRV // FI_GRV, <
 #define RABK LSFT(KC_GRV) // FI_RABK, >
-
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_BASE] = LAYOUT(
@@ -67,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //|---------+---------+---------+---------+---------+---------|                        |---------+---------+---------+---------+---------+---------|
         _______ , KC_LGUI , KC_LALT , KC_LCTL , KC_LSFT , _______ ,                          _______ , FI_CURR , FI_PERC , FI_AMPR , FI_UNDS , _______ ,
     //|---------+---------+---------+---------+---------+---------+---------.    ,---------|---------+---------+---------+---------+---------+---------|
-        _______ , _______ , _______ , _______ , _______ , _______,  _______ ,      _______ , FI_SCLN , FI_EXLM , FI_DQUO , FI_HASH , _______ , _______ ,
+        _______ , _______ , _______ , _______ , _______ , _______,  _______ ,      _______ , FI_SCLN , FI_EXLM , FI_DQUO , FI_HASH , NOTEQUAL, _______ ,
     //`---------+---------+---------+--+------+---------+---------+---------/    \---------+---------+---------+---------+---------+---------+---------'
                                                 _______ , _______ , _______,        _______, FI_EQL  , FI_COLN
     //                                        `---------+---------+------'          `------+---------+---------'
