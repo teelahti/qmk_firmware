@@ -20,6 +20,50 @@ enum custom_keycodes {
     NOTEQUAL = SAFE_RANGE,
 };
 
+// Left hand home row
+#define HOME_A LGUI_T(KC_A)
+#define HOME_S LALT_T(KC_S)
+#define HOME_D LCTL_T(KC_D)
+#define HOME_F LSFT_T(KC_F)
+
+// right hand home row
+#define HOME_J RSFT_T(KC_J)
+#define HOME_K RCTL_T(KC_K)
+#define HOME_L RALT_T(KC_L)
+#define HOME_OE RGUI_T(FI_ODIA)
+
+// Funtion shortcuts
+#define DELWRD RALT(KC_DEL)
+#define RDELWRD RALT(KC_BSPC)
+
+// Layer change keys
+#define FN_ENT LT(_SNUM,KC_ENT)
+#define FN_BSPC LT(_CTL,KC_BSPC)
+
+// Some of the default FI_* symbols do not work with MacOS
+#define PIPE LALT(KC_7) // FI_PIPE, |
+#define BSLS LALT(KC_AMPR) // FI_BSLS
+#define LCBR LALT(KC_ASTR) // FI_LCBR, {
+#define RCBR LALT(KC_LPRN) // FI_RCBR, }
+#define LABK KC_GRV // FI_GRV, <
+#define RABK LSFT(KC_GRV) // FI_RABK, >
+
+// Per key tapping term settings
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        // My finger tends to linger on these key which causes accidental modifier+symbol
+        // presses --> increase the time
+        case HOME_A:
+        case HOME_OE:
+            return TAPPING_TERM + 50;
+        case FN_ENT:
+            // Reduce the amount of accidental Enter key hits when using the key as layer change
+            return TAPPING_TERM - 50;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
     case NOTEQUAL:
@@ -34,37 +78,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 };
 
-
-// Abbreviations
-#define _G LGUI_T
-#define _A LALT_T
-#define _C LCTL_T
-#define _S LSFT_T
-#define _RS RSFT_T
-#define DELWRD RALT(KC_DEL)
-#define RDELWRD RALT(KC_BSPC)
-#define FN_ENT LT(_SNUM,KC_ENT)
-#define FN_BSPC LT(_CTL,KC_BSPC)
-// Some of the default FI_* symbols do not work with MacOS
-#define PIPE LALT(KC_7) // FI_PIPE, |
-#define BSLS LALT(KC_AMPR) // FI_BSLS
-#define LCBR LALT(KC_ASTR) // FI_LCBR, {
-#define RCBR LALT(KC_LPRN) // FI_RCBR, }
-#define LABK KC_GRV // FI_GRV, <
-#define RABK LSFT(KC_GRV) // FI_RABK, >
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[_BASE] = LAYOUT(
     //,---------+---------+---------+---------+---------+---------.                        ,---------+---------+---------+---------+---------+---------.
         KC_ESC  ,   KC_1  ,   KC_2  ,   KC_3  ,   KC_4  ,   KC_5  ,                            KC_6  ,   KC_7  ,   KC_8  ,    KC_9 ,   KC_0  , KC_MINS ,
     //|---------+---------+---------+---------+---------+---------|                        |---------+---------+---------+---------+---------+---------|
-        KC_ESC  ,   KC_Q  ,   KC_W  ,   KC_E  ,   KC_R  ,   KC_T  ,                            KC_Y  ,   KC_U  ,   KC_I  ,    KC_O ,    KC_P , KC_BSLS ,
+        KC_ESC  ,   KC_Q  ,   KC_W  ,   KC_E  ,   KC_R  ,   KC_T  ,                            KC_Y  ,   KC_U  ,   KC_I  ,    KC_O ,   KC_P  , KC_BSLS ,
     //|---------+---------+---------+---------+---------+---------|                        |---------+---------+---------+---------+---------+---------|
-        KC_TAB  ,_G(KC_A) ,_A(KC_S) ,_C(KC_D) ,_S(KC_F) ,   KC_G  ,                            KC_H  ,_S(KC_J) ,_C(KC_K) ,_A(KC_L) ,_G(FI_ODIA),FI_ADIA,
+        KC_TAB  ,  HOME_A ,  HOME_S ,  HOME_D ,  HOME_F ,   KC_G  ,                            KC_H  ,  HOME_J ,  HOME_K ,  HOME_L , HOME_OE , FI_ADIA ,
     //|---------+---------+---------+---------+---------+---------+---------.    ,---------|---------+---------+---------+---------+---------+---------|
         KC_LSFT ,   KC_Z  ,   KC_X  ,   KC_C  ,   KC_V  ,   KC_B  ,MO(_FNUM),     FN_BSPC  ,  KC_N   ,  KC_M   , KC_COMM , KC_DOT  , KC_SLSH , KC_RSFT ,
     //`---------+---------+---------+--+------+---------+---------+---------/    \---------+---------+---------+---------+---------+---------+---------'
-                                             KC_LGUI  , MO(_NUM) , FN_ENT ,        KC_SPC   , MO(_NAV) , KC_RGUI
+                                             KC_LGUI  , MO(_NUM) , FN_ENT ,        KC_SPC  , MO(_NAV) ,  KC_RGUI
     //                                        `---------+---------+------'          `------+---------+---------'
     ),
 	[_NUM] = LAYOUT(
