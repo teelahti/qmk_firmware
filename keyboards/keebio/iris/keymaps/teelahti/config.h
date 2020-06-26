@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define EE_HANDS
 
 // default 200
-#define TAPPING_TERM 160
+#define TAPPING_TERM 170
 #define TAPPING_TERM_PER_KEY
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_FORCE_HOLD
 
 // This prevents short hold periods to be interpreted as individual taps when typing quickly.
-// #define PERMISSIVE_HOLD
+#define PERMISSIVE_HOLD
 
 // Recommended for heavy chording.
 #define QMK_KEYS_PER_SCAN 4
