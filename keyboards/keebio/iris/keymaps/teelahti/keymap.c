@@ -8,11 +8,12 @@
 extern keymap_config_t keymap_config;
 
 enum layers {
-    _BASE,
+    _QWERTY,
     _NUM,
     _SNUM,
     _FNUM,
     _NAV,
+    _CODE,
     _CTL
 };
 
@@ -35,10 +36,15 @@ enum custom_keycodes {
 // Funtion shortcuts
 #define DELWRD RALT(KC_DEL)
 #define RDELWRD RALT(KC_BSPC)
+#define SF12 LSFT(KC_F12) // SHIFT + F12
+#define CMIN LCTL(FI_MINS) // CTRL + -
 
 // Layer change keys
-#define FN_ENT LT(_SNUM,KC_ENT)
-#define FN_BSPC LT(_CTL,KC_BSPC)
+#define LT_ENT LT(_SNUM,KC_ENT)
+#define LT_SPC LT(_CODE,KC_SPC)
+#define LT_BSPC LT(_CTL,KC_BSPC)
+#define LT_NUM MO(_NUM)
+#define LT_NAV MO(_NAV)
 
 // Some of the default FI_* symbols do not work with MacOS
 #define PIPE LALT(KC_7) // FI_PIPE, |
@@ -56,7 +62,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case HOME_A:
         case HOME_OE:
             return TAPPING_TERM + 50;
-        case FN_ENT:
+        case LT_ENT:
             // Reduce the amount of accidental Enter key hits when using the key as layer change
             return TAPPING_TERM - 50;
         default:
@@ -79,7 +85,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-	[_BASE] = LAYOUT(
+	[_QWERTY] = LAYOUT(
     //,---------+---------+---------+---------+---------+---------.                        ,---------+---------+---------+---------+---------+---------.
         KC_ESC  ,   KC_1  ,   KC_2  ,   KC_3  ,   KC_4  ,   KC_5  ,                            KC_6  ,   KC_7  ,   KC_8  ,    KC_9 ,   KC_0  , KC_MINS ,
     //|---------+---------+---------+---------+---------+---------|                        |---------+---------+---------+---------+---------+---------|
@@ -87,9 +93,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //|---------+---------+---------+---------+---------+---------|                        |---------+---------+---------+---------+---------+---------|
         KC_TAB  ,  HOME_A ,  HOME_S ,  HOME_D ,  HOME_F ,   KC_G  ,                            KC_H  ,  HOME_J ,  HOME_K ,  HOME_L , HOME_OE , FI_ADIA ,
     //|---------+---------+---------+---------+---------+---------+---------.    ,---------|---------+---------+---------+---------+---------+---------|
-        KC_LSFT ,   KC_Z  ,   KC_X  ,   KC_C  ,   KC_V  ,   KC_B  ,MO(_FNUM),     FN_BSPC  ,  KC_N   ,  KC_M   , KC_COMM , KC_DOT  , KC_SLSH , KC_RSFT ,
+        KC_LSFT ,   KC_Z  ,   KC_X  ,   KC_C  ,   KC_V  ,   KC_B  ,  LT_NAV ,     LT_BSPC  ,  KC_N   ,  KC_M   , KC_COMM , KC_DOT  , KC_SLSH , KC_RSFT ,
     //`---------+---------+---------+--+------+---------+---------+---------/    \---------+---------+---------+---------+---------+---------+---------'
-                                             KC_LGUI  , MO(_NUM) , FN_ENT ,        KC_SPC  , MO(_NAV) ,  KC_RGUI
+                                             KC_LGUI  ,  LT_NUM  , LT_ENT ,        LT_SPC  ,  LT_NAV ,  KC_RGUI
     //                                        `---------+---------+------'          `------+---------+---------'
     ),
 	[_NUM] = LAYOUT(
@@ -118,6 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                 _______ , _______ , _______,        _______, FI_EQL  , FI_COLN
     //                                        `---------+---------+------'          `------+---------+---------'
     ),
+    // TODO: Currently there is no way to enter this layer
     [_FNUM] = LAYOUT(
     //,---------+---------+---------+---------+---------+---------.                        ,---------+---------+---------+---------+---------+---------.
         _______ , _______ , _______ , _______ , _______ , _______ ,                          _______ , _______ , _______ , _______ , _______ , _______ ,
@@ -135,13 +142,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //,---------+---------+---------+---------+---------+---------.                        ,---------+---------+---------+---------+---------+---------.
         _______ , _______ , _______ , _______ , _______ , _______ ,                          _______ , _______ , _______ , _______ , _______ , _______ ,
     //|---------+---------+---------+---------+---------+---------|                        |---------+---------+---------+---------+---------+---------|
-        FI_GRV  , _______ , FI_LBRC , FI_RBRC ,   PIPE  ,   BSLS  ,                          _______ , KC_PGUP ,  KC_UP  , KC_PGDN , FI_ARNG , FI_DIAE ,
+        _______ , _______ , _______ , _______ , _______ , _______ ,                          _______ , KC_PGUP ,  KC_UP  , KC_PGDN , FI_ARNG , FI_DIAE ,
     //|---------+---------+---------+---------+---------+---------|                        |---------+---------+---------+---------+---------+---------|
-        _______ , _______ ,   LCBR  ,   RCBR  , FI_LPRN , FI_RPRN ,                          KC_HOME , KC_LEFT , KC_DOWN , KC_RGHT , KC_END  , FI_ACUT ,
+        _______ , KC_LGUI , KC_LALT , KC_LCTL , KC_LSFT , _______ ,                          KC_HOME , KC_LEFT , KC_DOWN , KC_RGHT , KC_END  ,   SF12  ,
     //|---------+---------+---------+---------+---------+---------+---------.    ,---------|---------+---------+---------+---------+---------+---------|
-        _______ , KC_LALT ,   LABK  ,   RABK  , FI_CIRC , FI_TILD , _______ ,      KC__MUTE, RDELWRD , KC_BSPC , KC_DEL  , DELWRD  , KC_ENT  , KC_F13  ,
+        _______ , _______ , _______ , _______ , _______ , _______,  _______ ,      KC__MUTE, RDELWRD , KC_BSPC , KC_DEL  , DELWRD  ,  CMIN   , KC_F12  ,
     //`---------+---------+---------+--+------+---------+---------+---------/    \---------+---------+---------+---------+---------+---------+---------'
                                                 _______ ,  KC_NO  , _______,        KC__VOLDOWN,_______,KC__VOLUP
+    //                                        `---------+---------+------'          `------+---------+---------'
+    ),
+    [_CODE] = LAYOUT(
+    //,---------+---------+---------+---------+---------+---------.                        ,---------+---------+---------+---------+---------+---------.
+        _______ , _______ , _______ , _______ , _______ , _______ ,                          _______ , _______ , _______ , _______ , _______ , _______ ,
+    //|---------+---------+---------+---------+---------+---------|                        |---------+---------+---------+---------+---------+---------|
+        FI_GRV  , FI_LBRC , FI_RBRC ,   PIPE  ,   BSLS  , FI_ACUT ,                          _______ , _______ , _______ , _______ , _______ , _______ ,
+    //|---------+---------+---------+---------+---------+---------|                        |---------+---------+---------+---------+---------+---------|
+        _______ ,   LCBR  ,   RCBR  , FI_LPRN , FI_RPRN , FI_DQUO ,                          _______ , KC_RSFT , KC_RCTL , KC_RALT , KC_RGUI , _______ ,
+    //|---------+---------+---------+---------+---------+---------+---------.    ,---------|---------+---------+---------+---------+---------+---------|
+        _______ ,   LABK  ,   RABK  , FI_CIRC , FI_TILD , FI_EQL  ,  KC_NO  ,      KC_NO   , _______ , _______ , _______ , _______ , _______ , _______ ,
+    //`---------+---------+---------+--+------+---------+---------+---------/    \---------+---------+---------+---------+---------+---------+---------'
+                                                _______ ,  KC_NO  , _______,        _______, _______  , _______
     //                                        `---------+---------+------'          `------+---------+---------'
     ),
     [_CTL] = LAYOUT(
