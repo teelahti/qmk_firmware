@@ -65,7 +65,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM + 50;
         case LT_ENT:
             // Reduce the amount of accidental Enter key hits when using the key as layer change
-            return TAPPING_TERM - 50;
+            return TAPPING_TERM - 30;
         default:
             return TAPPING_TERM;
     }
