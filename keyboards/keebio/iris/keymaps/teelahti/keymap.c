@@ -33,7 +33,7 @@ enum custom_keycodes {
 #define HOME_L RALT_T(KC_L)
 #define HOME_OE RGUI_T(FI_ODIA)
 
-// Funtion shortcuts
+// Function shortcuts
 #define DELWRD RALT(KC_DEL)
 #define RDELWRD RALT(KC_BSPC)
 #define SF12 LSFT(KC_F12) // SHIFT + F12
