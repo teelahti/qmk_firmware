@@ -63,16 +63,19 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         // GUI:
         case HOME_A:
         case HOME_OE:
-        // Shift:
-        case HOME_J:
-        case HOME_F:
-           return TAPPING_TERM + 50;
+           return TAPPING_TERM + 30;
 
-        // Reduce the amount of accidental Enter and Space key hits when using the key
+        // Reduce the amount of accidental Enter and Space key hits when using those keys
         // as layer change
         case LT_ENT:
         case LT_SPC:
             return TAPPING_TERM - 20;
+
+        // Using shift is usually fast, reduce tap term for them to avoid getting
+        // individual keys instead of shift + key.
+        case HOME_J:
+        case HOME_F:
+            return TAPPING_TERM - 50;
 
         default:
             return TAPPING_TERM;
