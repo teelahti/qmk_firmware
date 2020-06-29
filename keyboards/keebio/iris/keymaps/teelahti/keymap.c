@@ -60,19 +60,20 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         // My finger tends to linger on these key which causes accidental modifier+symbol
         // presses --> increase the time
-        // case HOME_A:
-        // case HOME_OE:
-        //    return TAPPING_TERM + 50;
+        // GUI:
+        case HOME_A:
+        case HOME_OE:
+        // Shift:
+        case HOME_J:
+        case HOME_F:
+           return TAPPING_TERM + 50;
 
         // Reduce the amount of accidental Enter and Space key hits when using the key
         // as layer change
         case LT_ENT:
         case LT_SPC:
-            return TAPPING_TERM - 30;
-        // Lots of mistakes with shift, reduce them
-        case HOME_J:
-        case HOME_F:
-            return TAPPING_TERM - 50;
+            return TAPPING_TERM - 20;
+
         default:
             return TAPPING_TERM;
     }
