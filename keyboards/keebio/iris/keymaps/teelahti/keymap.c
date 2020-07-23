@@ -61,9 +61,9 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         // My finger tends to linger on these key which causes accidental modifier+symbol
         // presses --> increase the time
         // GUI:
-        case HOME_A:
-        case HOME_OE:
-           return TAPPING_TERM + 30;
+        // case HOME_A:
+        // case HOME_OE:
+        //    return TAPPING_TERM + 30;
 
         // Reduce the amount of accidental Enter and Space key hits when using those keys
         // as layer change
@@ -75,10 +75,28 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         // individual keys instead of shift + key.
         case HOME_J:
         case HOME_F:
-            return TAPPING_TERM - 50;
+            return TAPPING_TERM - 80;
 
         default:
             return TAPPING_TERM;
+    }
+}
+
+// Per key permissive hold setting
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        // Disable for home row modifiers
+        case HOME_A:
+        case HOME_S:
+        case HOME_D:
+        case HOME_F:
+        case HOME_J:
+        case HOME_K:
+        case HOME_L:
+        case HOME_OE:
+            return false;
+        default:
+            return true;
     }
 }
 
