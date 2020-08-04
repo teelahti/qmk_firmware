@@ -31,9 +31,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_FORCE_HOLD
 
 // This prevents short hold periods to be interpreted as individual taps when typing quickly.
-// #define PERMISSIVE_HOLD
+#define PERMISSIVE_HOLD
 // Use per key option to be able to disable permissive hold from home row modifiers
-#define PERMISSIVE_HOLD_PER_KEY
+// #define PERMISSIVE_HOLD_PER_KEY
 
 // Recommended for heavy chording.
 #define QMK_KEYS_PER_SCAN 4
