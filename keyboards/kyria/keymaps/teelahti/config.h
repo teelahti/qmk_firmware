@@ -1,6 +1,5 @@
 #pragma once
 
-// #define USE_I2C
 #define EE_HANDS
 
 // default 200
@@ -18,5 +17,12 @@
 // Use per key option to be able to disable permissive hold from home row modifiers
 // #define PERMISSIVE_HOLD_PER_KEY
 
+#define LEADER_PER_KEY_TIMING
+#define LEADER_TIMEOUT 350
+
 // Recommended for heavy chording.
 #define QMK_KEYS_PER_SCAN 4
+
+#ifdef OLED_DRIVER_ENABLE
+  #define OLED_DISPLAY_128X64
+#endif
