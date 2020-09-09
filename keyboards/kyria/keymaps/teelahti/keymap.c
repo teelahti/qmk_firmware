@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LSFT   |   Z  |   X  |   C  |   V  |   B  |  Nav | Del  |  |Leader| Bspc |   N  |   M  |   ,  |   .  |   -  |  RSFT  |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | Alt  | GUI  |      | Space| Enter|  | Enter| Space|      | GUI  |  Alt |
+ *                        | Alt  | GUI  |      | Space| Enter|  | Enter| Space|      | GUI  |  Ctl |
  *                        |      |      |  Num | Snum | FNum |  |  Ctl | Code | Nav  |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_ESC,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                      KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
       KC_TAB,  HOME_A, HOME_S, HOME_D, HOME_F, KC_G,                                      KC_H,   HOME_J,  HOME_K,  HOME_L,  HOME_OE, FI_ADIA,
       KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   LT_NAV, KC_DEL, KC_LEAD, KC_BSPC,  KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                               KC_LALT,KC_LGUI,LT_NUM, LT_SPC2,LT_ENT, LT_ENT2, LT_SPC,   LT_NAV, KC_RGUI, KC_RALT
+                               KC_LALT,KC_LGUI,LT_NUM, LT_SPC2,LT_ENT, LT_ENT2, LT_SPC,   LT_NAV, KC_RGUI, KC_RCTL
     ),
 /*
  * Numpad layer, activated with LT_NUM
@@ -235,7 +235,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         // individual keys instead of shift + key.
         case HOME_J:
         case HOME_F:
-            return TAPPING_TERM - 30;
+            return TAPPING_TERM - 60;
 
         default:
             return TAPPING_TERM;
