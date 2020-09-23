@@ -323,9 +323,6 @@ void process_action(keyrecord_t *record, action_t action) {
                     }
                     send_keyboard_report();
                 }
-#ifdef BILATERAL_COMBINATIONS
-                bilateral_combinations_tap(event.key);
-#endif
                 register_code(action.key.code);
             } else {
                 unregister_code(action.key.code);
