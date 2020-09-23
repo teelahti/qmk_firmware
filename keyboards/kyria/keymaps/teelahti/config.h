@@ -17,6 +17,9 @@
 // Use per key option to be able to disable permissive hold from home row modifiers
 // #define PERMISSIVE_HOLD_PER_KEY
 
+// Experimental stuff from https://github.com/manna-harbour/qmk_firmware/blob/bilateral-combinations/docs/tap_hold.md#bilateral-combinations
+#define BILATERAL_COMBINATIONS
+
 #define LEADER_PER_KEY_TIMING
 #define LEADER_TIMEOUT 350
 
