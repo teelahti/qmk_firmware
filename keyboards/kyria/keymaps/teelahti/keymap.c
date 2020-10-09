@@ -278,7 +278,7 @@ void matrix_scan_user(void) {
             SEND_STRING("tero@teelahti.fi");
         }
         SEQ_TWO_KEYS(KC_E, KC_E) { // Email work
-            SEND_STRING("tero@armadainteractive.com");
+            SEND_STRING("tero.teelahti@nextgames.com");
         }
         SEQ_TWO_KEYS(KC_G, KC_B) { // Greeting
             SEND_STRING("Best,\n\nTero");
