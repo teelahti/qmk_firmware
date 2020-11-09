@@ -64,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * | ESC    |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |   '    |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * | TAB    |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  |   Ö  |   Ä    |
+ * | TAB    |   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  |   Ö  |   Ä    |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LSFT   |   Z  |   X  |   C  |   V  |   B  |  Nav | Del  |  |Leader| Bspc |   N  |   M  |   ,  |   .  |   -  |  RSFT  |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -235,7 +235,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         // individual keys instead of shift + key.
         case HOME_J:
         case HOME_F:
-            return TAPPING_TERM - 60;
+            return TAPPING_TERM - 20;
 
         default:
             return TAPPING_TERM;
