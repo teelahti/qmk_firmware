@@ -8,7 +8,7 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
- * Base Layer: QWERTY
+ * Base Layer 1: QWERTY
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * | ESC    |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |   '    |
@@ -17,7 +17,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * | LSFT   |   Z  |   X  |   C  |   V  |   B  |  Nav | Del  |  |Leader| Bspc |   N  |   M  |   ,  |   .  |   -  |  RSFT  |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | Alt  | GUI  |      | Space| Enter|  | Enter| Space|      | GUI  |  Ctl |
+ *                        | Alt  | GUI  |      | Space| Enter|  | Enter| Space|      | GUI  |  Win |
  *                        |      |      |  Num | Snum | FNum |  |  Ctl | Code | Nav  |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
@@ -25,7 +25,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_ESC,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                      KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
       KC_TAB,  HOME_A, HOME_S, HOME_D, HOME_F, KC_G,                                      KC_H,   HOME_J,  HOME_K,  HOME_L,  HOME_OE, FI_ADIA,
       KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   LT_NAV, KC_DEL, KC_LEAD, KC_BSPC,  KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                               KC_LALT,KC_LGUI,LT_NUM, LT_SPC2,LT_ENT, LT_ENT2, LT_SPC,   LT_NAV, KC_RGUI, KC_RCTL
+                               KC_LALT,KC_LGUI,LT_NUM, LT_SPC2,LT_ENT, LT_ENT2, LT_SPC,   LT_NAV, KC_RGUI, TG_WIN
+    ),
+/*
+ * Base Layer 2: QWERTY Windows. Changes the programming layer to a Windows-version
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * | ESC    |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |   '    |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * | TAB    |   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  |   Ö  |   Ä    |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * | LSFT   |   Z  |   X  |   C  |   V  |   B  |  Nav | Del  |  |Leader| Bspc |   N  |   M  |   ,  |   .  |   -  |  RSFT  |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        | Alt  | GUI  |      | Space| Enter|  | Enter| Space|      | GUI  |  Mac |
+ *                        |      |      |  Num | Snum | FNum |  |  Ctl | Code | Nav  |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_QWERTY_WIN] = LAYOUT(
+      KC_ESC,  KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                      KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
+      KC_TAB,  HOME_A, HOME_S, HOME_D, HOME_F, KC_G,                                      KC_H,   HOME_J,  HOME_K,  HOME_L,  HOME_OE, FI_ADIA,
+      KC_LSFT, KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   LT_NAV, KC_DEL, KC_LEAD, KC_BSPC,  KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+                               KC_LALT,KC_LGUI,LT_NUM, LT_SPC2,LT_ENT, LT_ENT2, W_LT_SPC, LT_NAV, KC_RGUI, TG_WIN
     ),
 /*
  * Numpad layer, activated with LT_NUM
@@ -64,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_SNUM] = LAYOUT(
       _______, _______, _______, _______, _______, _______,                                     _______, FI_SLSH, FI_LPRN, FI_RPRN, FI_QUES, FI_DIAE,
       _______, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______,                                     _______, FI_CURR, FI_PERC, FI_AMPR, FI_UNDS, _______,
-      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, NOTEQUAL, FI_EXLM, FI_DQUO, FI_HASH,FI_SCLN ,FI_COLN,
+      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, NOTEQUAL,FI_EXLM, FI_DQUO, FI_HASH,FI_SCLN ,FI_COLN,
                                  _______, _______, _______, _______, _______, _______, _______, FI_EQL , _______, _______
     ),
 
@@ -109,6 +129,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 /*
+ * Coding layer Windows, entered with LT_SPC
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |   `    |   [  |  ]   |  |   |  \   |  ´   |                              |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |   ~    |   {  |  }   |  (   |  )   |  "   |                              |      | Shift| Ctl  |  Alt | GUI  |        |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |   @    |   <  |  >   |  !   |  =   |  ^   |      |      |  |      |      |      |      |      |      |      |        |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |      |      |      |      |      |  |      |      |      |      |      |
+ *                        |      |      |      |      |      |  |      | Code |      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_CODE_WIN] = LAYOUT(
+      FI_GRV,  FI_LBRC, FI_RBRC, FI_PIPE, FI_BSLS, FI_ACUT,                                     _______, _______, _______, _______, _______, _______,
+      FI_TILD, FI_LCBR, FI_RCBR, FI_LPRN, FI_RPRN, FI_DQUO,                                     _______, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, _______,
+      FI_AT,   FI_LABK, FI_RABK, FI_EXLM, FI_EQL,  FI_CIRC, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+    ),
+/*
  * Navigation Layer, entered with Nav
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
@@ -143,7 +183,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_CTL] = LAYOUT(
-      _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
+      _______, _______,  _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
       _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
       _______, _______, _______, _______, _______, RESET,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
@@ -321,7 +361,14 @@ static void render_status(void) {
     // Host Keyboard Layer Status
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
-            oled_write_P(PSTR("QWERTY\n\n"), false);
+            oled_write_P(PSTR("QWERTY MAC\n\n"), false);
+            oled_write_P(PSTR("                  \n"), false);
+            oled_write_P(PSTR("                  \n"), false);
+            oled_write_P(PSTR("                  \n"), false);
+            oled_write_P(PSTR("                  \n"), false);
+            break;
+        case _QWERTY_WIN:
+            oled_write_P(PSTR("QWERTY WIN\n\n"), false);
             oled_write_P(PSTR("                  \n"), false);
             oled_write_P(PSTR("                  \n"), false);
             oled_write_P(PSTR("                  \n"), false);
@@ -329,14 +376,14 @@ static void render_status(void) {
             break;
         case _NUM:
             oled_write_P(PSTR("Num:\n\n"), false);
-            oled_write_P(PSTR("* 7 8 9 + å\n"), false);
-            oled_write_P(PSTR("/ 4 5 6 - ä\n"), false);
+            oled_write_P(PSTR("* 7 8 9 + o\n"), false);
+            oled_write_P(PSTR("/ 4 5 6 - a\n"), false);
             oled_write_P(PSTR("= 1 2 3 , .\n"), false);
             oled_write_P(PSTR("0\n"), false);
             break;
         case _SNUM:
             oled_write_P(PSTR("Shifted num:\n\n"), false);
-            oled_write_P(PSTR("   / ( ) ? ¨\n"), false);
+            oled_write_P(PSTR("   / ( ) ? ''\n"), false);
             oled_write_P(PSTR("   e % & _\n"), false);
             oled_write_P(PSTR("!= ! \" # ; :\n"), false);
             oled_write_P(PSTR("=\n"), false);
@@ -349,7 +396,14 @@ static void render_status(void) {
             oled_write_P(PSTR("\n"), false);
             break;
         case _CODE:
-            oled_write_P(PSTR("Code:\n\n"), false);
+            oled_write_P(PSTR("Code MAC:\n\n"), false);
+            oled_write_P(PSTR("` [ ] | \\ ´\n"), false);
+            oled_write_P(PSTR("~ { } ( ) \"\n"), false);
+            oled_write_P(PSTR("@ < > ! = ^\n"), false);
+            oled_write_P(PSTR("\n"), false);
+            break;
+        case _CODE_WIN:
+            oled_write_P(PSTR("Code WIN:\n\n"), false);
             oled_write_P(PSTR("` [ ] | \\ ´\n"), false);
             oled_write_P(PSTR("~ { } ( ) \"\n"), false);
             oled_write_P(PSTR("@ < > ! = ^\n"), false);

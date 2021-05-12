@@ -5,11 +5,13 @@
 
 enum layers {
     _QWERTY,
+    _QWERTY_WIN,
     _NUM,
     _SNUM,
     _FNUM,
     _NAV,
     _CODE,
+    _CODE_WIN,
     _CTL
 };
 
@@ -36,9 +38,12 @@ enum custom_keycodes {
 #define CMIN LCTL(FI_MINS)   // CTRL + -
 
 // Layer change keys
+// Change the base layer between Mac and Win
+#define TG_WIN TG(_QWERTY_WIN)
 #define LT_ENT LT(_FNUM,KC_ENT)
 #define LT_ENT2 LT(_CTL,KC_ENT)
 #define LT_SPC LT(_CODE,KC_SPC)
+#define W_LT_SPC LT(_CODE_WIN,KC_SPC)
 #define LT_SPC2 LT(_SNUM,KC_SPC)
 #define LT_DEL LT(_FNUM,KC_DEL)
 #define LT_NUM MO(_NUM)
@@ -52,3 +57,4 @@ enum custom_keycodes {
 #define LABK KC_GRV        // FI_GRV, <
 #define RABK LSFT(KC_GRV)  // FI_RABK, >
 #define AT LALT(KC_2)
+
