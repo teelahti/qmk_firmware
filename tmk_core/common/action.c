@@ -286,7 +286,9 @@ static void bilateral_combinations_tap(keyevent_t event) {
         }
         bilateral_combinations.active = false;
     }
+}
 #endif
+
 #if defined(PS2_MOUSE_ENABLE) || defined(POINTING_DEVICE_ENABLE)
 void register_button(bool pressed, enum mouse_buttons button) {
 #    ifdef PS2_MOUSE_ENABLE
